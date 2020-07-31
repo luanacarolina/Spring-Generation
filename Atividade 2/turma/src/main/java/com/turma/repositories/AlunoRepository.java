@@ -1,10 +1,9 @@
 package com.turma.repositories;
 
-import com.turma.models.TurmaModel;
+import com.turma.models.Aluno;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface TurmaRepository extends JpaRepository<TurmaModel,Long> {
-
+public interface AlunoRepository extends JpaRepository<Aluno,Long> {
 }
