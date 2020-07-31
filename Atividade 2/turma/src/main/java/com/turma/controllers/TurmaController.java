@@ -1,6 +1,6 @@
 package com.turma.controllers;
 
-import com.turma.models.TurmaModel;
+import com.turma.models.Turma;
 import com.turma.repositories.TurmaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -11,36 +11,34 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/turmas")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class TurmaController {
-
     @Autowired
-    private TurmaRepository repository;
+    private TurmaRepository turmaRepository;
 
     @GetMapping
-    public ResponseEntity<List<TurmaModel>> findAllTurma(){
-        return ResponseEntity.ok(repository.findAll());
+    public ResponseEntity<List<Turma>> getAll(){
+        return ResponseEntity.ok(turmaRepository.findAll());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<TurmaModel> findById(@PathVariable  long id){
-        return repository.findById(id)
+    public ResponseEntity<Turma> getById(@PathVariable long id){
+        return turmaRepository.findById(id)
                 .map(resp -> ResponseEntity.ok(resp))
                 .orElse(ResponseEntity.notFound().build());
     }
-
     @PostMapping
-    public ResponseEntity<TurmaModel> post(@RequestBody TurmaModel turma){
-        return ResponseEntity.status(HttpStatus.CREATED).body(repository.save(turma));
+    public ResponseEntity<Turma> post(@RequestBody Turma turma) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(turmaRepository.save(turma));
     }
-
     @PutMapping
-    public ResponseEntity<TurmaModel> put(@RequestBody TurmaModel turma){
-        return ResponseEntity.status(HttpStatus.OK).body(repository.save(turma));
+    public ResponseEntity<Turma> put(@RequestBody Turma turma){
+        return ResponseEntity.status(HttpStatus.OK).body(turmaRepository.save(turma));
     }
-
+    
     @DeleteMapping("/{id}")
     public void delete(@PathVariable long id){
-        repository.deleteById(id);
+        turmaRepository.deleteById(id);
     }
 
 }

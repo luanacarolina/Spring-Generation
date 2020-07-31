@@ -9,18 +9,15 @@ import javax.validation.constraints.NotNull;
 @Table(name = "tb_aluno")
 public class Aluno {
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-
     @NotNull
     private String nome;
-
     @NotNull
-    private  boolean matriculado;
-
+    private boolean matriculado;
     @ManyToOne
     @JsonIgnoreProperties("alunos")
-    private TurmaModel turma;
+    private Turma turma;
 
     public long getId() {
         return id;
@@ -44,5 +41,13 @@ public class Aluno {
 
     public void setMatriculado(boolean matriculado) {
         this.matriculado = matriculado;
+    }
+
+    public Turma getTurma() {
+        return turma;
+    }
+
+    public void setTurma(Turma turma) {
+        this.turma = turma;
     }
 }

@@ -21,26 +21,22 @@ public class AlunoController {
     public ResponseEntity<List<Aluno>> getAll(){
         return ResponseEntity.ok(alunoRepository.findAll());
     }
-
     @GetMapping("/{id}")
     public ResponseEntity<Aluno> getById(@PathVariable long id){
         return alunoRepository.findById(id)
-                .map(resp ->ResponseEntity.ok(resp))
+                .map(resp->ResponseEntity.ok(resp))
                 .orElse(ResponseEntity.notFound().build());
     }
-
     @PostMapping
-    public ResponseEntity<Aluno> post(@RequestBody  Aluno aluno ){
+    public ResponseEntity<Aluno> post(@RequestBody Aluno aluno){
         return ResponseEntity.status(HttpStatus.CREATED).body(alunoRepository.save(aluno));
     }
-
     @PutMapping
     public ResponseEntity<Aluno> put(@RequestBody Aluno aluno){
         return ResponseEntity.status(HttpStatus.OK).body(alunoRepository.save(aluno));
     }
-
     @DeleteMapping("/{id}")
     public void delete(@PathVariable long id){
-        alunoRepository.deleteById(id);
+         alunoRepository.deleteById(id);
     }
 }
